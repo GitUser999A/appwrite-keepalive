@@ -42,11 +42,30 @@ In your forked repository:
 1. Go to **Settings** → **Secrets and variables** → **Actions**
 2. Add these secrets:
 
-| Secret | Value |
-|--------|-------|
-| `APPWRITE_ENDPOINT` | Your API endpoint (see below) |
-| `APPWRITE_PROJECT_ID` | Your project ID |
-| `APPWRITE_API_KEY` | The API key you created |
+| Secret | Required | Value |
+|--------|----------|-------|
+| `APPWRITE_ENDPOINT` | yes | Your API endpoint (see below) |
+| `APPWRITE_PROJECT_ID` | yes | Your project ID |
+| `APPWRITE_API_KEY` | yes | The API key you created |
+| `APPWRITE_SITE_URLS` | only if you deploy Appwrite Sites | Single URL or comma-separated list of your deployed Sites URLs |
+
+### Using Appwrite Sites?
+
+Appwrite Sites can pause independently of project-level pause based on site traffic rather than database activity. If you deploy Sites, also set `APPWRITE_SITE_URLS` so the keepalive sends an HTTP GET to each deployed URL on every run, registering a visit and keeping the Site active.
+
+Single site:
+
+```text
+APPWRITE_SITE_URLS=https://my-app.appwrite.network
+```
+
+Multiple sites in one project:
+
+```text
+APPWRITE_SITE_URLS=https://site-a.appwrite.network,https://site-b.appwrite.network
+```
+
+If you do not deploy Sites, leave `APPWRITE_SITE_URLS` unset. The keepalive skips the HTTP step.
 
 **Finding your endpoint:** Your endpoint depends on your region:
 - `https://cloud.appwrite.io/v1` (US)
