@@ -5,7 +5,7 @@ on:
     # Runs every 5 days at midnight UTC
     # Appwrite pauses projects after 7 days of inactivity
     # 5 days gives us a safe buffer
-    - cron: "0 0 */5 * *"
+    - cron: "37 3 */5 * *"
 
   # Allow manual trigger for testing
   workflow_dispatch:
